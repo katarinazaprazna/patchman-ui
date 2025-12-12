@@ -1,4 +1,4 @@
-name: 'E2E tests: Stage'
+name: 'Stage: E2E Tests'
 on:
   pull_request:
     types: [ opened, reopened, synchronize, labeled, unlabeled ]
