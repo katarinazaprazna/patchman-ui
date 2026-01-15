@@ -10,9 +10,10 @@ import SystemsStatusReport from '../../PresentationalComponents/StatusReports/Sy
 import PatchSetWrapper from '../../PresentationalComponents/PatchSetWrapper/PatchSetWrapper';
 import RemediationWizard from '../Remediation/RemediationWizard';
 import SystemsTable from './SystemsTable';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useLocation } from 'react-router-dom';
 
 const SystemsMainContent = () => {
+  const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
   const [isRemediationOpen, setRemediationOpen] = useState(false);
@@ -32,7 +33,7 @@ const SystemsMainContent = () => {
   useEffect(() => {
     apply(decodedParams);
     return () => dispatch(clearInventoryReducer());
-  }, []);
+  }, [location.key]); // Fetch data every time a user "arrives" at the page to avoid staleness
 
   const { patchSetState, setPatchSetState, openUnassignSystemsModal, openAssignSystemsModal } =
     usePatchSetState(selectedRows);
